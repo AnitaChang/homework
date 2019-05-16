@@ -5,7 +5,7 @@ date: "2019/5/16"
 output: html_document
 ---
 ## Introduction to R language
-### Caculating with R 
+###  Caculating with R 
 ```{r}
 5+49
 3-8

@@ -1,0 +1,272 @@
+---
+title: "HOMEWORK"
+author: "AnitaChang"
+date: "2019/5/16"
+output: html_document
+---
+## Introduction to R language
+### Caculating with R 
+```{r}
+5+49
+3-8
+3*5
+31%%7
+31%/%7
+```
+```{r}
+
+```
+
+###  vector
+
+c()function is used to collect things together into a vector
+```{r}
+c(0,7,8)
+```
+create sequences
+```{r}
+numbers5to20<-5:20
+c(numbers5to20,7)
+```
+
+###  Extracting elements from vectors
+
+display the 8th element of mess
+```{r}
+mess<-c(numbers5to20,7)
+mess[8]
+```
+
+find the third through eleventh elements
+```{r}
+mess[-(3:11)]
+```
+
+###  Vector arithmetic
+
+multiply all element
+```{r}
+x<-c(0,7,8)
+x*3
+```
+
+```{r}
+y<--x-5
+```
+
+take the third power of element
+```{r}
+x^3
+```
+
+work *element by element* 
+```{r}
+y^x
+```
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+### Simple patterned vectors
+
+#### Patterned vectors can also be produced using **seq()** function as wel as **rep()** function. <br> Repeated patterns are obtained using ** rep()**.
+
+```{r}
+rep(seq(2,20,by=2),2)
+```
+
+repeat the patter1,3 times and 4,twice
+
+```{r}
+rep(c(1,4),c(3,2))
+```
+
+repeat each value twice
+```{r}
+rep(seq(2,20,2),rep(2,10))
+```
+
+### Character vectors
+#### Scalers and vectors can be made up of strings of characters instead of numbers.All element of a vector must be of **the same type**.
+This appended some new elements to colors.
+```{r}
+colors<-c("red","yellow","blue")
+more.colors<-c(colors,"green","magenta","cyan")
+more.colors
+```
+
+#### **paste()** This is building up strings by connection.
+```{r}
+paste(colors,"flowers")
+```
+
+The sep() controls what goes between the components being pasted together.
+```{r}
+paste("several",colors,"s",sep="")
+```
+
+**collpase()** to paste() allows all the components of the resulting vector to be collapsed into a single string.
+```{r}
+paste("I like",colors,collapse = ",")
+```
+
+### Matrics and arrays
+#### To arrange values into a matrix , we use the **matrix()** function.
+```{r}
+m<-matrix(1:6,nrow=2,ncol=3)
+m
+```
+
+see the element of the first row,second column
+```{r}
+m[1,2]
+```
+
+#### A more general way to store data is in an array.Arrays have multiple indices,and are created using the array function.
+```{r}
+a<-array(1:24,c(3,4,2))
+a
+```
+
+### Data frames
+#### **frame()** function is to construct data frames from vectors.
+```{r}
+colors<-c("red","yellow","blue")
+numbers<-c(1,2,3)
+colors.and.numbers<-data.frame(colors,numbers,more.numbers=c(4,5,6))
+colors.and.numbers
+```
+
+### Built in graphics functions
+Two basiic plot are the histogram and the scatterplot.
+
+
+```{r,fig.width=5,fig.height=5,fig.align="center",fig.show="asis"}
+x<-c(12,15,13,20,14,16,10,10,8,15)
+hist(x)
+x<-seq(1,10)
+y<-x^2-10*x
+plot(x,y)
+
+```
+
+---
+
+
+## Programming statistical graphics
+### High level plots
+
+The **beside=TRUE** arguement causes the values in each column to be plotted side by side.  **legend=TRUE** causes the legend in the top right to be added.
+```{r,fig.align="center"}
+barplot(VADeaths,beside=TRUE,legend=TRUE,ylim = c(0,90),ylab = "Deaths per 1000",main="Death rates in Virginia")
+```
+
+###  Pie charts
+```{r,fig.align="center"}
+groupsizes<-c(18,30,32,10,10)
+labels<-c("A","B","C","D","F")
+pie(groupsizes,labels,col=c("grey40","white","grey","black","grey90"))
+```
+
+###  Histograms 
+**hist()** is the main way to plot histograms.
+```{r,fig.align="center"}
+x<-rnorm(100)
+hist(x)
+```
+
+### Scaterplots
+```{r,fig.align="center"}
+x<-rnorm(100)
+y<-rpois(100,30)
+plot(x,y,main="Poisson versus Normal")
+
+```
+
+### QQplot
+Quantile-quantile plot are a type of scatterplot used to compare the distribution of two groups or to compare a sample with a reference distribution.
+```{r,out.width="50%",out.height="50%",results="hold",fig.sep=c(2,2),fig.align="center"}
+X<-rnorm(1000)
+A<-rnorm(1000)
+qqplot(X,A,main="A and X are the same.")
+B<-rnorm(1000,mean=3,sd=2)
+qqplot(X,B,main="B is rescaled X.")
+C<-rt(1000,df=2)
+qqplot(X,C,main="C has heavler tails.")
+D<-exp(rnorm(1000))
+qqplot(X,D,main="D is skewed to the right.")
+```
+
+
+### Adding to plots
+**points(x,y,....)** <br> 
+**lines(x,y,.....)adds line segements**  <br>
+**text (x,y,labels,...) adds text into the graph**  <br>
+**abline(a,b,.....)adds the line y=a+bx**  <br>
+**abline(h=y,.....)adds a horizontal line**  <br>
+**abline(v=x,.....)adds a vertical line**  <br>
+**polygon(x,y,....)adds a closed and possibly filled polygon**  <br>
+**segements(x,y,x1,x2,...)draws arrows** <br>
+**symbols(x,y,....)draws circles,squares,thermometers** <br>
+**legend(x,y,legend,....)draws a legend <br> **
+
+---
+
+##  Linear algebra
+
+### Vectors and matrix
+**matrix(data,nrow,ncol)** <br>
+**cbind(d1,d2,....)** <br>
+**rbind(d1,d2,....)** <br>
+```{r}
+H3<-matrix(c(1,1/2,1/3,1/2,1/3,1/4,1/3,1/4,1/5),nrow=3)
+H3
+```
+ 
+This is a ```3x3matrix```.
+```{r}
+x<-seq(1,3)
+x2<-x^2
+x<-cbind(x,x2)
+x
+```
+
+### Matrix properties
+the dimension of a matrix
+```{r}
+dim(x)
+```
+
+the matrix transpose
+```{r}
+t(x)
+```
+
+### Matrix arithmetic
+```{r,results="hold"}
+y<-2*x
+y
+x*y
+```
+
+### Matrix multiplication and inversion
+matrix multiplication
+```{r}
+t(y)%*%x
+```
+
+The **crossprod()** is to cacluate transpose of y multiple x
+```{r}
+crossprod(y,x)
+```
+
+### Solving linear systems
+The function **solve(A,B)**  gives the solution of the form Ax=b .
+```{r}
+b<-c(1,2,3)
+x<-solve(H3,b)
+x
+```
+
